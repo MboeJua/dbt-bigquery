@@ -1,0 +1,1 @@
+select * from `bigquery-testing-368011.dbt_pmboejua.Fusion_Ads`
