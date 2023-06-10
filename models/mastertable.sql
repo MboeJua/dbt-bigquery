@@ -1,3 +1,5 @@
+--CREATE OR REPLACE TABLE
+--  bigquery-testing-368011.dbt_pmboejua.Master_Table AS
 WITH
   mastertable1 AS (
   SELECT
@@ -42,7 +44,6 @@ WITH
     FKBD.Profile_ID,
     FKBD.Quality_Score,
     FKBD.Status,
-   -- FKBD.Tracking_ID,
     FKBD.Tracking_Template,
     FKBD.Upgr__URL_Ind_,
     FKBD.Imp__Share,
@@ -58,7 +59,7 @@ WITH
     FKBD.Office_Designation,
     FKBD.Owner,
     FKBD.Experiment,
- --   FKBD.leads_kw,
+
     --- items from Ads by Device
      FABD.Date Date2,
   FABD.Currency Currency2,
@@ -110,31 +111,10 @@ WITH
     FABD.Clicks Clicks_ads,
     FABD.Cost Cost_ads,
     FABD.ga4_form_lead ga4_form_leads_ads,
---    FABD.ga4_lead_2 ga4_call_leads_ads,
---    FABD.leads_ads,
     (FABD.Rev_ - FABD.Cost)  Profit_ads,
     FABD.ads_key
 
-    -- items from sitelink
-    --FSL.Account_ID,
-    --FSL.Account_SiteLink,
-   -- FSL.Channel_Sitelink_ID,
-   -- FSL.Creation_Date,
-   -- FSL.Device_Target,
-   -- FSL.Shared_with_Campaign,
-   -- FSL.Sitelink_Description1,
-   -- FSL.Sitelink_Description2,
-   -- FSL.Sitelink_Feed_ID,
-   -- FSL.Sitelink_ID,
-   -- FSL.Sitelink_Mobile_Optimized,
-   -- FSL.Sitelink_Status,
-   -- FSL.Sitelink_Text,
-    --FSL.Sitelink_URL,
-   -- FSL.Sitelinks_Schedule_End_Date,
-   -- FSL.Sitelinks_Schedule_Start_Date,
-   -- FSL.Unique_Channel_Account_ID,
-   -- FSL.rev_ Rev_sitelinks,
-   -- FSL.conversions conversions_sitelinks
+  
   FROM
     `bigquery-testing-368011.dbt_pmboejua.Fusion_Keywords` FKBD
    JOIN
@@ -155,18 +135,6 @@ WITH
   
 
 
-
-
-  --  and FKBD.ga4_form_lead = FABD.ga4_form_lead
-  --left JOIN
-  --  fusion_sitelinks FSL
- -- ON
-  --  FKBD.Date = FSL.Date
-  --  AND FKBD.Campaign_Name = FSL.Campaign_Name
-   -- AND FKBD.Profile_Name = FSL.Profile_Name
-   -- AND FKBD.Campaign_ID= FSL.Campaign_ID
-   -- AND FKBD.Channel_Account_ID = FSL.Channel_Account_ID
-   -- AND FKBD.Channel = FSL.Channel 
    ),
   mastertable2 as ( 
 SELECT
@@ -209,4 +177,4 @@ FROM
   select (null) Ad_Group_Name, Date, Campaign_Name, Channel, Device, (null) Keyword, Clicks, Cost, Rev_, conversions, ( Rev_- Cost)Profit, Profile_Name, Account_Name, (null) Ad_Group_ID, (null) AdGroup_ID_in_Kenshoo,(null) AdGroup_Status,(null) Bid, Campaign_ID,(null) Campaign_Status, Channel_Account_ID, Channel_Account_Publisher_ID,(null) Channel_Ad_Group_ID, Channel_Campaign_ID,(null) Channel_Keyword_ID,(null) Custom_Parameter_1,(null) Custom_Parameter_2,(null) Custom_Parameter_3,(null) Keyword_Creation_Date,(null) Keyword_ID,(null) Land_URL_Keywords, Last_Modified,(null) Match_Type, Mobile_Bid_Adjustment,(null) Mobile_URL, Network, Profile_Currency, Profile_ID,(null) Quality_Score, Status,(null) Tracking_Template,(null) Upgr__URL_Ind_,(null) Imp__Share, Impr___Abs_Top__, Impr___Top__, Impressions,(null) Lost_IS_rank,(null) Potential_Impressions,(null) Search__Abs_Top__IS_,(null) Search__Top__IS_, ga4_form_lead, ga4_call_lead,(null) Office_Designation,(null) Owner,(null) Experiment,(null) Tracking_ID,(null) Headline,(null) Display_URL,(null) Headline_2,(null) Headline_3,(null) Image_Name,(null) Line_1,(null) Line_2,(null) Path_1,(null) Path_2,(null) Promotion,(null) Channel_Ad_id,(null) Land_url_ads,(rev_) rev_ads,(conversions) Conversion_ads,(null) Quality_Score_ads,(null) Avg_Pos_,(Impr___Abs_Top__) Impr___Abs_Top__ads,(Impr___Top__) Impr___Top__ads,(Impressions) Impressions_ads,(Clicks) Clicks_ads,(cost) Cost_ads,(ga4_form_lead) ga4_form_leads_ads,--
   (Rev_ - Cost)Profit_ads,("ads_key") ads_key,(1) rank_ads,(1) rank_keywords
   from `bigquery-testing-368011.dbt_pmboejua.Fusion_Campaigns`
-  ;
+  
